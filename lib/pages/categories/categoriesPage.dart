@@ -13,6 +13,7 @@ class CategoriesPage extends StatelessWidget {
             (categoryData) => CategoryItem(
               color: categoryData.color,
               title: categoryData.title,
+              id: categoryData.id,
             ),
           )
           .toList(),

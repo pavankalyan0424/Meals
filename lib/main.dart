@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './pages/categories/mealsPage.dart';
 
 import './pages/homePage.dart';
 
@@ -31,7 +32,12 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: MyHomePage(),
+      // home: MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        '/':(ctx) => MyHomePage(),
+        CategoryMealsPage.routeName: (ctx) => CategoryMealsPage()
+      },
     );
   }
 }
