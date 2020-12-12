@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'mealsPage.dart';
+import '../pages/mealsPage.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
