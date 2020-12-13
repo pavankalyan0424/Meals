@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:meals/pages/mealDetailPage.dart';
 
+import './pages/filtersPage.dart';
 import './pages/homePage.dart';
+import './pages/mealDetailPage.dart';
 import 'pages/mealsPage.dart';
 
 void main() {
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
         '/': (ctx) => MyHomePage(),
         CategoryMealsPage.routeName: (ctx) => CategoryMealsPage(),
         MealDetailPage.routeName: (ctx) => MealDetailPage(),
+        FiltersPage.routeName: (ctx) => FiltersPage(),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
