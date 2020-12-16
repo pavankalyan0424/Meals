@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/meals.dart';
 
+import '../models/meals.dart';
 import '../pages/mealDetailPage.dart';
 
 class MealItem extends StatelessWidget {
@@ -14,7 +14,7 @@ class MealItem extends StatelessWidget {
 
   const MealItem(
       {@required this.imageUrl,
-      @required this.removeItem,
+      this.removeItem,
       @required this.id,
       @required this.title,
       @required this.duration,
@@ -24,7 +24,7 @@ class MealItem extends StatelessWidget {
   void selectMeal(BuildContext context) {
     Navigator.pushNamed(context, MealDetailPage.routeName, arguments: id)
         .then((value) {
-      if (value!=null){
+      if (value != null) {
         removeItem(value);
       }
     });

@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:meals/models/meals.dart';
 import 'package:meals/widgets/mainDrawer.dart';
 
 import 'categoriesPage.dart';
 import 'favoritesPage.dart';
 
 class MyHomePage extends StatefulWidget {
+  final List<Meal> favoriteMeals;
+
+  const MyHomePage({@required this.favoriteMeals});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+  List<Map<String, Object>> _pages = [];
 
-  final List<Map<String, Object>> _pages = [
-    {'page': CategoriesPage(), 'title': 'Categories'},
-    {'page': FavoritesPage(), 'title': 'Favorites'},
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _pages = [
+      {'page': CategoriesPage(), 'title': 'Categories'},
+      {
+        'page': FavoritesPage(favoriteMeals: widget.favoriteMeals),
+        'title': 'Favorites'
+      },
+    ];
+  }
 
   void _selectedPage(int index) {
     setState(() {

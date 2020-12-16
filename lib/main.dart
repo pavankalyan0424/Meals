@@ -19,7 +19,24 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   List<bool> filters = [false, false, false, false];
   List<Meal> _availableMeals = DUMMY_MEALS;
+  List<Meal> _favoriteMeals = [];
 
+  void _toggleFavorite(String mealId) {
+    final existingIndex =
+        _favoriteMeals.indexWhere((meal) => meal.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoriteMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        _favoriteMeals.add(DUMMY_MEALS.firstWhere((meal) => mealId == meal.id));
+      });
+    }
+  }
+bool _isFavorite(String id){
+    return _favoriteMeals.any((meal)=>meal.id==id);
+}
   void _setFilters(List<bool> filterData) {
     setState(() {
       filters = filterData;
@@ -68,20 +85,27 @@ class _MyAppState extends State<MyApp> {
       // home: MyHomePage(),
       initialRoute: '/',
       routes: {
-        '/': (ctx) => MyHomePage(),
+        '/': (ctx) => MyHomePage(
+              favoriteMeals: _favoriteMeals,
+            ),
         CategoryMealsPage.routeName: (ctx) =>
             CategoryMealsPage(_availableMeals),
-        MealDetailPage.routeName: (ctx) => MealDetailPage(),
+        MealDetailPage.routeName: (ctx) =>
+            MealDetailPage(toggleFavorite: _toggleFavorite, isFavorite: _isFavorite,),
         FiltersPage.routeName: (ctx) => FiltersPage(_setFilters, filters),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
-          builder: (context) => MyHomePage(),
+          builder: (context) => MyHomePage(
+            favoriteMeals: _favoriteMeals,
+          ),
         );
       },
       onGenerateRoute: (settings) {
         return MaterialPageRoute(
-          builder: (context) => MyHomePage(),
+          builder: (context) => MyHomePage(
+            favoriteMeals: _favoriteMeals,
+          ),
         );
       },
     );
